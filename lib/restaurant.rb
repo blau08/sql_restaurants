@@ -11,16 +11,16 @@ class Restaurant
     returned_restaurants = DB.exec("SELECT * FROM restaurants ORDER BY name ASC;")
     restaurants = []
     returned_restaurants.each() do |restaurant|
-      name = restaurant.fetch("name")
-      location = restaurant.fetch("location")
-      phone = restaurant.fetch("phone")
+      name = restaurant.fetch("name").gsub("''", "'")
+      location = restaurant.fetch("location").gsub("''", "'")
+      phone = restaurant.fetch("phone").gsub("''", "'")
       restaurants.push(Restaurant.new({:name => name, :location => location, :phone => phone}))
     end
     restaurants
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO restaurants (name, location, phone) VALUES ('#{@name}', '#{@location}', '#{@phone}') RETURNING id;")
+    result = DB.exec("INSERT INTO restaurants (name, location, phone) VALUES ('#{@name.gsub("'", "''")}', '#{@location.gsub("'", "''")}', '#{@phone.gsub("'", "''")}') RETURNING id;")
     @id = result.first().fetch('id').to_i()
   end
 

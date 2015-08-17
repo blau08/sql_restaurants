@@ -1,1 +1,27 @@
 <h1>Restaurants</h1>
+<% if @success_message != nil %>
+
+<div class="success"><%= @success_message %></div>
+
+<% end %>
+
+<ul>
+  <% @restaurants.each() do |restaurant| %>
+
+    <li>
+      <h2><%= restaurant.name() %></h2>
+      <p>
+        Location: <%= restaurant.location() %><br>
+        Phone Number: <%= restaurant.phone() %>
+      </p>
+    </li>
+
+  <% end %>
+</ul>
+
+<form action="/restaurant/new" method="post">
+  <input type="text" name="name" placeholder="Restaurant Name">
+  <input type="text" name="location" placeholder="Location">
+  <input type="text" name="phone" placeholder="Phone Number">
+  <button type="Submit" class="btn-add">Add a Restaurant</button>
+</form>
