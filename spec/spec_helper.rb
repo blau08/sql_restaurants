@@ -1,7 +1,6 @@
 require('rspec')
 require('food')
 require('restaurant')
-require('restaurants_spec')
 require('pg')
 
 DB = PG.connect({:dbname => 'restaurants'})

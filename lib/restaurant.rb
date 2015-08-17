@@ -2,9 +2,9 @@ class Restaurant
   attr_reader(:name, :location, :phone, :id)
 
   define_method(:initialize) do |attributes|
-    @name = attributes.fetch("name")
-    @location = attributes.fetch("location")
-    @phone = attributes.fetch("phone")
+    @name = attributes.fetch(:name)
+    @location = attributes.fetch(:location)
+    @phone = attributes.fetch(:phone)
   end
 
   define_singleton_method(:all) do
@@ -18,4 +18,14 @@ class Restaurant
     end
     restaurants
   end
+
+  define_method(:save) do
+    result = DB.exec("INSERT INTO restaurants (name, location, phone) VALUES ('#{@name}', '#{@location}', '#{@phone}') RETURNING id;")
+    @id = result.first().fetch('id').to_i()
+  end
+
+  define_method(:==) do |another_restaurant|
+    self.name() == another_restaurant.name() && location() == another_restaurant.location() && phone() == another_restaurant.phone()
+  end
+
 end
