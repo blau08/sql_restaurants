@@ -1,4 +1,5 @@
 require("spec_helper")
+require("pry")
 
 describe(Restaurant) do
   describe(".all") do
@@ -21,6 +22,15 @@ describe(Restaurant) do
       test_restaurant.save()
       Restaurant.delete(test_restaurant.id())
       expect(Restaurant.all()).to(eq([]))
+    end
+  end
+
+  describe("#id") do
+    it("displays the id of a restaurant after saving") do
+      test_restaurant = Restaurant.new({:name => "La Ristorante de Kyle", :location => "Outer Space", :phone => "503-000-4567"})
+      test_restaurant.save()
+      print Restaurant.all()
+      expect(test_restaurant.id()).to(be >= 1)
     end
   end
 end

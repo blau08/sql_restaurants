@@ -5,16 +5,22 @@ class Restaurant
     @name = attributes.fetch(:name)
     @location = attributes.fetch(:location)
     @phone = attributes.fetch(:phone)
+    @id = attributes.fetch(:id, nil)
   end
 
-  define_singleton_method(:all) do
-    returned_restaurants = DB.exec("SELECT * FROM restaurants ORDER BY name ASC;")
+  define_singleton_method(:all) do |id = nil|
+    if id == nil
+      returned_restaurants = DB.exec("SELECT * FROM restaurants ORDER BY name ASC;")
+    else
+      returned_restaurants = DB.exec("SELECT * FROM restaurants WHERE id=#{id} ORDER BY name ASC;")
+    end
     restaurants = []
     returned_restaurants.each() do |restaurant|
       name = restaurant.fetch("name").gsub("''", "'")
       location = restaurant.fetch("location").gsub("''", "'")
       phone = restaurant.fetch("phone").gsub("''", "'")
-      restaurants.push(Restaurant.new({:name => name, :location => location, :phone => phone}))
+      id = restaurant.fetch("id").to_i()
+      restaurants.push(Restaurant.new({:name => name, :location => location, :phone => phone, :id => id}))
     end
     restaurants
   end

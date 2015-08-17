@@ -21,7 +21,7 @@ describe('/', {:type => :feature}) do
     fill_in('name', :with => "Brian's Awesome Sauce")
     fill_in('location', :with => "Beijing")
     fill_in('phone', :with => "503-123-4567")
-    click_button('Add a Restaurant')
+    click_button("Add a Restaurant")
     expect(page).to have_content("Brian's Awesome Sauce")
   end
 end
