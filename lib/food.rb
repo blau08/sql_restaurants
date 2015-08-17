@@ -10,9 +10,9 @@ class Food
 
   define_singleton_method(:all) do |restaurant_id = nil|
     if restaurant_id == nil
-      all_foods = DB.exec("SELECT * FROM foods;")
+      all_foods = DB.exec("SELECT * FROM foods ORDER BY rating DESC;")
     else
-      all_foods = DB.exec("SELECT * FROM foods WHERE restaurant_id=#{restaurant_id}")
+      all_foods = DB.exec("SELECT * FROM foods WHERE restaurant_id=#{restaurant_id} ORDER BY rating DESC;")
     end
     foods = []
     all_foods.each() do |food|
@@ -34,7 +34,7 @@ class Food
   define_singleton_method(:delete) do |id|
     DB.exec("DELETE FROM foods WHERE id=#{id}")
   end
-  
+
   define_method(:==) do |another_food|
     self.name() == another_food.name() && cost() == another_food.cost() && rating() == another_food.rating() && restaurant_id() == another_food.restaurant_id()
   end
