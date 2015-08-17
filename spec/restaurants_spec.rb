@@ -25,7 +25,7 @@ describe(Restaurant) do
   end
 end
 
-Describe(Food) do
+describe(Food) do
   describe(".all") do
     it("returns empty at first") do
       expect(Food.all()).to(eq([]))
@@ -33,23 +33,17 @@ Describe(Food) do
   end
   describe("#save") do
     it("saves the restaurants") do
-      test_food = Food.new({:name => "La Ristorante de Kyle", :location => "Outer Space", :phone => "503-000-4567"})
-      test_food = Food.new({:name => "La Ristorante de Kyle", :location => "Outer Space", :phone => "503-000-4567"})
+      test_food = Food.new({:name => 'Pizza', :cost => '$15-20', :rating => 10.0, :restaurant_id => 1})
       test_food.save()
-      test_food.save()
-      expect(Food.all()).to(eq([test_food]))
       expect(Food.all()).to(eq([test_food]))
     end
   end
   describe(".delete") do
     it("deletes food by id number") do
-    it("deletes food by id number") do
-      test_food = Food.new({:name => "La Ristorante de Kyle", :location => "Outer Space", :phone => "503-000-4567"})
-      test_food = Food.new({:name => "La Ristorante de Kyle", :location => "Outer Space", :phone => "503-000-4567"})
+      test_food = Food.new({:name => 'Pizza', :cost => '$15-20', :rating => 10.0, :restaurant_id => 1})
       test_food.save()
-      test_food.save()
-      Food.delete(test_food.id())
       Food.delete(test_food.id())
       expect(Food.all()).to(eq([]))
     end
   end
+end

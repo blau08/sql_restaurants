@@ -3,7 +3,7 @@ require('food')
 require('restaurant')
 require('pg')
 
-DB = PG.connect({:dbname => 'restaurants'})
+DB = PG.connect({:dbname => 'restaurants_test'})
 
 RSpec.configure do |config|
   config.after(:each) do
