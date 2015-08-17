@@ -8,7 +8,7 @@ class Restaurant
   end
 
   define_singleton_method(:all) do
-    returned_restaurants = DB.exec("SELECT * FROM restaurants;")
+    returned_restaurants = DB.exec("SELECT * FROM restaurants ORDER BY name ASC;")
     restaurants = []
     returned_restaurants.each() do |restaurant|
       name = restaurant.fetch("name")
