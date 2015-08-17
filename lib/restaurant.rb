@@ -24,6 +24,10 @@ class Restaurant
     @id = result.first().fetch('id').to_i()
   end
 
+  define_singleton_method(:delete) do |id|
+    returned_restaurants = DB.exec("DELETE FROM restaurants WHERE id=#{id};")
+  end
+
   define_method(:==) do |another_restaurant|
     self.name() == another_restaurant.name() && location() == another_restaurant.location() && phone() == another_restaurant.phone()
   end
