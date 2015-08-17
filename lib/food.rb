@@ -31,6 +31,10 @@ class Food
     @id = result.first().fetch('id').to_i()
   end
 
+  define_singleton_method(:delete) do |id|
+    DB.exec("DELETE FROM foods WHERE id=#{id}")
+  end
+  
   define_method(:==) do |another_food|
     self.name() == another_food.name() && cost() == another_food.cost() && rating() == another_food.rating() && restaurant_id() == another_food.restaurant_id()
   end
